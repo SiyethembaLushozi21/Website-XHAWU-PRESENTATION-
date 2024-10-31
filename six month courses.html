@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Six Month Courses</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    /* Your existing CSS styles */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #32ADE6; /* Light blue background */
+        color: white; /* Changed text color to white */
+        margin: 0;
+        padding: 0;
+    }
+
+    header {
+        background-color: rgba(209, 215, 220, 0.8); /* Removed background */
+        padding: 10px;
+    }
+
+    header nav ul {
+        list-style-type: none;
+        padding: 0;
+        text-align: left;
+    }
+
+    header nav ul li {
+        display: inline;
+        margin-right: 20px;
+    }
+
+    header nav ul li a {
+        color: white; /* Changed text color to white */
+        text-decoration: none;
+        font-size: 16px;
+    }
+
+    .courses-section {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    h1 {
+        text-align: center;
+        color: white; /* Changed text color to white */
+        font-size: 36px;
+        margin-bottom: 30px;
+    }
+
+    .course-item {
+        padding: 20px;
+        margin-bottom: 30px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        text-align: center;
+        border: 1px solid #ccc; /* Slight border for separation */
+        background-color: rgb(75, 154, 219); /* Simple white background */
+    }
+
+    h2 {
+        color: white; /* Changed text color to white */
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+
+    .course-item img {
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+        border-radius: 5px;
+    }
+
+    .price {
+        font-weight: bold;
+        margin-top: 10px;
+        font-size: 18px;
+        color: white; /* Changed text color to white */
+    }
+
+    .content {
+        text-align: left;
+        margin-top: 15px;
+        color: white; /* Changed text color to white */
+    }
+
+    .content h3 {
+        margin-bottom: 10px;
+    }
+
+    .content ul {
+        list-style-type: disc;
+        padding-left: 20px;
+    }
+
+    button {
+        margin: 10px 5px;
+        padding: 10px;
+        background-color: #32ADE6;
+        color: white; /* Kept text color white */
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    button:hover {
+        background-color: #2288A3;
+    }
+
+    #pricing {
+        margin-top: 30px;
+        text-align: center;
+        font-size: 18px;
+    }
+
+    #pricing p {
+        margin: 10px 0;
+        color: white; /* Changed text color to white */
+    }
+
+    .proceed-btn {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: rgba(209, 215, 220, 0.8);
+        color: white; /* Kept text color white */
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 18px;
+    }
+
+    .proceed-btn:hover {
+        background-color: rgba(209, 215, 220, 0.8);
+    }
+</style>
+<script>
+    const coursePrices = {
+        "First Aid": 1500,
+        "Sewing": 15000,
+        "Landscaping": 1500,
+        "Life Skills": 1500,
+    };
+
+    let selectedCourses = [];
+
+    function selectCourse(courseName) {
+        if (!selectedCourses.includes(courseName)) {
+            selectedCourses.push(courseName);
+        }
+        updateTotal();
+    }
+
+    function unselectCourse(courseName) {
+        selectedCourses = selectedCourses.filter(course => course !== courseName);
+        updateTotal();
+    }
+
+    function calculateDiscount(numCourses) {
+        if (numCourses === 2) {
+            return 0.05;
+        } else if (numCourses === 3) {
+            return 0.1;
+        } else if (numCourses >= 4) {
+            return 0.15;
+        } else {
+            return 0;
+        }
+    }
+
+    function updateTotal() {
+        let totalPrice = 0;
+        selectedCourses.forEach(course => {
+            totalPrice += coursePrices[course];
+        });
+
+        const discount = calculateDiscount(selectedCourses.length);
+        const discountAmount = totalPrice * discount;
+        const finalPrice = totalPrice - discountAmount;
+
+        document.getElementById('totalPrice').textContent = `Total Price: R${totalPrice.toFixed(2)}`;
+        document.getElementById('discount').textContent = `Discount: R${discountAmount.toFixed(2)} (${(discount * 100).toFixed(0)}%)`;
+        document.getElementById('finalPrice').textContent = `Final Price after Discount: R${finalPrice.toFixed(2)}`;
+    }
+</script>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="homepage.html">Homepage</a></li>
+                <li><a href="about us.html">About Us</a></li>
+                <li><a href="six month courses.html">Six Month Courses</a></li>
+                <li><a href="six week courses.html">Six Week Courses</a></li>
+                <li><a href="apply.html">Apply</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="courses-section">
+        <h1>Six Month Courses</h1>
+
+        <div class="course-item">
+            <h2>1. First Aid</h2>
+            <img src="first aid.png" alt="First Aid Course">
+            <p>This course provides skills to navigate basic life care for children.</p>
+            <p class="price">Price: R1500</p>
+            <div class="content">
+                <h3>Content:</h3>
+                <ul>
+                    <li>Wounds and bleedings</li>
+                    <li>Burns and fractures</li>
+                    <li>Emergency scene management</li>
+                    <li>Cardio-Pulmonary Resuscitation (CPR)</li>
+                </ul>
+            </div>
+            <button onclick="selectCourse('First Aid')">Select</button>
+            <button onclick="unselectCourse('First Aid')">Unselect</button>
+        </div>
+
+        <div class="course-item">
+            <h2>2. Sewing</h2>
+            <img src="sewing.png" alt="Sewing Course">
+            <p>We offer this course to provide alterations and new garment tailoring services.</p>
+            <p class="price">Price: R15000</p>
+            <div class="content">
+                <h3>Content:</h3>
+                <ul>
+                    <li>Types of stitches</li>
+                    <li>Threading a sewing machine</li>
+                    <li>Sewing buttons, Zips, hems, and seams</li>
+                </ul>
+            </div>
+            <button onclick="selectCourse('Sewing')">Select</button>
+            <button onclick="unselectCourse('Sewing')">Unselect</button>
+        </div>
+
+        <div class="course-item">
+            <h2>3. Landscaping</h2>
+            <img src="landscaping.png" alt="Landscaping Course">
+            <p>We provide this course to offer landscaping services for new and established.</p>
+            <p class="price">Price: R1500</p>
+            <div class="content">
+                <h3>Content:</h3>
+                <ul>
+                    <li>Indigenous and exotic plants and trees</li>
+                    <li>Fixed Structure</li>
+                    <li>Balancing of plants and trees in the garden</li>
+                </ul>
+            </div>
+            <button onclick="selectCourse('Landscaping')">Select</button>
+            <button onclick="unselectCourse('Landscaping')">Unselect</button>
+        </div>
+
+        <div class="course-item">
+            <h2>4. Life Skills</h2>
+            <img src="Life Skills.png" alt="Life Skills Course">
+            <p>This course provides skills for personal and professional development.</p>
+            <p class="price">Price: R1500</p>
+            <div class="content">
+                <h3>Content:</h3>
+                <ul>
+                    <li>Opening a bank account</li>
+                    <li>Basic labor law</li>
+                    <li>Basic reading and writing literacy</li>
+                </ul>
+            </div>
+            <button onclick="selectCourse('Life Skills')">Select</button>
+            <button onclick="unselectCourse('Life Skills')">Unselect</button>
+        </div>
+
+        <div id="pricing">
+            <p id="totalPrice">Total Price: R0.00</p>
+            <p id="discount">Discount: R0.00 (0%)</p>
+            <p id="finalPrice">Final Price after Discount: R0.00</p>
+        </div>
+
+        <div class="proceed-section">
+            <a href="apply.html" class="proceed-btn">PROCEED</a>
+        </div>
+    </section>
+</body>
+</html>
